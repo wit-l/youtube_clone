@@ -32,7 +32,7 @@ const PlaylistDetail = () => {
         <Box
           sx={{
             color: "white",
-            m: 4,
+            m: 2,
           }}
         >
           <Typography variant="h3" sx={{ textAlign: "center" }}>
@@ -40,9 +40,8 @@ const PlaylistDetail = () => {
           </Typography>
           <Typography
             sx={{
-              height: "120px",
               textAlign: "center",
-              mt: 2,
+              p: 2,
             }}
           >
             published by: {playlistInfo.snippet.channelTitle}
