@@ -16,10 +16,14 @@ const VideoDetail = () => {
     Promise.all([
       fetchFromAPI(`videos?part=snippet,statistics&id=${id}`),
       fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`),
-    ]).then(([videoInfo, related]) => {
-      setVideoDetail(videoInfo.items[0]);
-      setVideos(related.items);
-    });
+    ])
+      .then(([videoInfo, related]) => {
+        setVideoDetail(videoInfo.items[0]);
+        setVideos(related.items);
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
   }, [id]);
 
   if (!videoDetail?.snippet) return <Loader />;
