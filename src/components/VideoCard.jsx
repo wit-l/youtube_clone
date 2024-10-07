@@ -13,7 +13,7 @@ import {
 
 const VideoCard = ({
   video: {
-    id: { videoId },
+    id: { videoId, playlistId },
     snippet,
   },
 }) => (
@@ -24,7 +24,15 @@ const VideoCard = ({
       borderRadius: 0,
     }}
   >
-    <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
+    <Link
+      to={
+        videoId
+          ? `/video/${videoId}`
+          : playlistId
+            ? `/playlist/${playlistId}`
+            : demoVideoUrl
+      }
+    >
       <CardMedia
         image={snippet?.thumbnails?.high?.url || demoThumbnailUrl}
         alt={snippet?.title}
@@ -40,7 +48,15 @@ const VideoCard = ({
         height: "106px",
       }}
     >
-      <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
+      <Link
+        to={
+          videoId
+            ? `/video/${videoId}`
+            : playlistId
+              ? `/playlist/${playlistId}`
+              : demoVideoUrl
+        }
+      >
         <Typography variant="subtitle1" fontWeight="bold" color="#FFF">
           {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
         </Typography>
@@ -62,4 +78,3 @@ const VideoCard = ({
 );
 
 export default VideoCard;
-

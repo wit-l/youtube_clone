@@ -3,6 +3,10 @@ import { Stack, Box } from "@mui/material";
 
 import { ChannelCard, Loader, VideoCard } from "./";
 
+const PlaylistCard = ({ playlistDetail }) => (
+  <VideoCard video={playlistDetail} />
+);
+
 const Videos = ({ videos, direction, justifyContent }) => {
   if (!videos?.length) return <Loader />;
 
@@ -16,10 +20,13 @@ const Videos = ({ videos, direction, justifyContent }) => {
     >
       {videos.map((item, idx) => (
         <Box key={idx} width={{ xs: "100%", sm: "auto" }}>
-          {(item.id?.videoId || item.id?.playlistId) && (
+          {item.id?.videoId ? (
             <VideoCard video={item} />
+          ) : item.id?.playlistId ? (
+            <PlaylistCard playlistDetail={item} />
+          ) : (
+            item.id?.channelId && <ChannelCard channelDetail={item} />
           )}
-          {item.id?.channelId && <ChannelCard channelDetail={item} />}
         </Box>
       ))}
     </Stack>
